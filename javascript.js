@@ -27,6 +27,11 @@ clear.addEventListener('click', () => {
         num = prompt('Please specify a number between 0 and 100');
     }
     createGrid(num);
+    
+    const cells = gridContainer.querySelectorAll('div');
+    cells.forEach(cell => cell.addEventListener('mouseover', () => {
+    cell.style.backgroundColor = '#000000';
+}));
 })
 
 function createGrid(x) {
@@ -41,8 +46,7 @@ function createGrid(x) {
 
 document.onload = createGrid(16);
 
-const cell = document.querySelector('.cell');
-cell.addEventListener('mouseover', () => {
-    const draw = document.getElementsByClassName('.cell')
-    draw.classList.add('draw');
-});
+const cells = gridContainer.querySelectorAll('div');
+cells.forEach(cell => cell.addEventListener('mouseover', () => {
+    cell.style.backgroundColor = '#000000';
+}));
