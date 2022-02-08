@@ -1,0 +1,16 @@
+#grid {
+    border: 2px solid blue;
+    display: grid;
+    
+    place-content: stretch;
+    width: 600px;
+    height: 600px;
+}
+
+.cell {
+    border: 0.5px solid lightgrey;
+}
+
+.draw {
+    background-color: black;
+}
