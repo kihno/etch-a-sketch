@@ -64,12 +64,17 @@ function paint() {
             break;
         case grey:
             const greyscale = ['#e5e5e5', '#cccccc', '#b2b2b2', '#999999', '#7f7f7f', '#666666', '#4c4c4c', '#333333', '#191919', '#000000'];
-            cells.forEach(cell => cell.addEventListener('mouseover', () => {
-                let shade = 0++;
-                cell.style.backgroundColor = greyscale[shade];
             
-                
-            }));
+                cells.forEach(cell => cell.addEventListener('mouseover', (e) => {
+                    cell.style.backgroundColor = '#000';
+                    if (!e.target.style.opacity) {
+                        e.target.style.opacity = 0.2;
+                    } else {
+                        let shade = Number(e.target.style.opacity) + 0.1;
+                        e.target.style.opacity = shade;
+                    }
+                }));
+            
             break;
     }
     
@@ -105,6 +110,7 @@ function removeCells() {
 }; */
 
 document.onload = 
+    
     createGrid(slider.value);
     sliderValue.textContent = slider.value + " x " + slider.value;
     paint();
