@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 body {
     display: flex;
     flex-direction: column;
@@ -8,10 +6,9 @@ body {
     background-color: #24a19c;
 }
 
-h1 {
-    color: #faeee7;
-    display: block;
-    font-family: 'Press Start P2', cursive;
+#logo {
+    margin: 20px;
+    width: 20%;
 }
 
 #container {
@@ -20,6 +17,7 @@ h1 {
     background-color: #d96098;
     padding: 30px 0 30px 30px;
     border-radius: 20px;
+    box-shadow: 5px 5px 15px #000;
 }
 
 #gridContain {
@@ -30,9 +28,10 @@ h1 {
 }
 
 #range {
+    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap:25px;
 }
 
 #buttonContain {
@@ -40,7 +39,7 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     gap: 40px;
-    padding: 20px 20px 80px 20px;
+    padding: 20px 20px 60px 20px;
 }
 
 #paintBtns {
@@ -83,13 +82,44 @@ h1 {
 }
 
 #sliderValue{
+    text-align: center;
     color: #325288;
     background-color: white;
+    width: 65px;
+    height: 20px;
     padding: 5px;
     border-radius: 5px;
+    box-shadow: inset 1px 1px 1px #000;
 }
+
+#slider {
+    -webkit-appearance: none;
+    width: 80%;
+    height: 15px;
+    background: white;
+    outline: none;
+    border-radius: 8px;
+    box-shadow: inset 1px 1px 1px #000;
+}
+
+#slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 50px;
+    width: 20px;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px #000;
+}
+
 
 .cell {
     background-color: white;
     border: 0.5px solid lightgrey;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
 }

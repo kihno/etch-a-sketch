@@ -16,27 +16,38 @@ slider.oninput = function() {
 }
 
 //Clear Button
+let previous = null;
+
 clear.addEventListener('click', () => {
+    removeCells();
+    createGrid(slider.value);
+    previous.focus();
+    paint();
+});
+
+//Paint Buttons
+let mode = black;
+blackButton.addEventListener('click', () => {
+    mode = black;
+    previous = document.activeElement;
     removeCells();
     createGrid(slider.value);
     paint();
 });
 
-//Color Button
-
-let mode = black;
-blackButton.addEventListener('click', () => {
-    mode = black;
-    paint();
-});
-
 colorButton.addEventListener('click', () => {
     mode = color;
+    previous = document.activeElement;
+    removeCells();
+    createGrid(slider.value);
     paint();
 });
 
 greyButton.addEventListener('click', () => {
     mode = grey;
+    previous = document.activeElement;
+    removeCells();
+    createGrid(slider.value);
     paint();
 });
 
@@ -48,41 +59,39 @@ function randomColor() {
     return color;
 }
 
+//Paint Function
 function paint() {
     const cells = gridContainer.querySelectorAll('div');
 
     switch(mode) {
         case black:
             cells.forEach(cell => cell.addEventListener('mouseover', () => {
-                cell.style.backgroundColor = '#000000';
+                cell.style.backgroundColor = 'black';
             }));
             break;
         case color:
             cells.forEach(cell => cell.addEventListener('mouseover', () => {
+                if (!cell.style.backgroundColor == 'white') {
+                    return;
+                } else {
                 cell.style.backgroundColor = randomColor();
+                }
             }));
             break;
         case grey:
-            const greyscale = ['#e5e5e5', '#cccccc', '#b2b2b2', '#999999', '#7f7f7f', '#666666', '#4c4c4c', '#333333', '#191919', '#000000'];
-            
-                cells.forEach(cell => cell.addEventListener('mouseover', (e) => {
-                    cell.style.backgroundColor = '#000';
-                    if (!e.target.style.opacity) {
-                        e.target.style.opacity = 0.2;
-                    } else {
-                        let shade = Number(e.target.style.opacity) + 0.1;
-                        e.target.style.opacity = shade;
-                    }
-                }));
-            
+            cells.forEach(cell => cell.addEventListener('mouseover', (e) => {
+                cell.style.backgroundColor = '#000';
+                if (!e.target.style.opacity) {
+                    e.target.style.opacity = 0.2;
+                } else {
+                    let shade = Number(e.target.style.opacity) + 0.1;
+                    e.target.style.opacity = shade;
+                }
+            }));
             break;
     }
     
 };
-
-/* colorButton.addEventListener('click', () => {
-    paintColor();
-}) */
 
 //Sketch Grid
 function createGrid(x) {
@@ -101,16 +110,6 @@ function removeCells() {
     }
 }
 
-/*function paint() {
-    const cells = gridContainer.querySelectorAll('div');
-
-    cells.forEach(cell => cell.addEventListener('mouseover', () => {
-        cell.style.backgroundColor = '#000000';
-    }));
-}; */
-
 document.onload = 
-    
     createGrid(slider.value);
     sliderValue.textContent = slider.value + " x " + slider.value;
-    paint();
