@@ -1,39 +1,42 @@
 // Variables
 const gridContainer = document.querySelector('#grid');
-const buttonOne = document.querySelector('.button1');
-const buttonTwo = document.querySelector('.button2');
-const clear = document.querySelector('.clear');
+const blackButton = document.querySelector('#black');
+const colorButton = document.querySelector('#color');
+const greyButton = document.querySelector('#grey');
+const clear = document.querySelector('#clear');
+const slider = document.querySelector('#slider');
+const sliderValue = document.querySelector('#sliderValue');
 
+// Slider
+slider.oninput = function() {
+    sliderValue.textContent = this.value + " x " + this.value;
+    removeCells();
+    createGrid(this.value);
 
-/* buttonOne.addEventListener('click', () => {
-    createGrid(32);
-});
-
-buttonTwo.addEventListener('click', () => {
-    createGrid(64);
-});
-*/
-
-function removeCells() {
-    while (gridContainer.firstChild) {
-        gridContainer.removeChild(gridContainer.firstChild);
-    }
+    paint();
 }
 
+//Clear Button
 clear.addEventListener('click', () => {
     removeCells();
-    let num = prompt('How many rows would you like?');
-    if (num < 0 || num > 100 ) {
-        num = prompt('Please specify a number between 0 and 100');
-    }
-    createGrid(num);
-    
+    createGrid(slider.value);
+    paint();
+});
+
+//Color Button
+function paintColor() {
     const cells = gridContainer.querySelectorAll('div');
-    cells.forEach(cell => cell.addEventListener('mouseover', () => {
-    cell.style.backgroundColor = '#000000';
-}));
+
+    cells.forEach(cell => cell.addEventListener('mouseover'), () => {
+        cell.style.backgroundColor = 'red';
+    });
+};
+
+colorButton.addEventListener('click', () => {
+    paintColor();
 })
 
+//Sketch Grid
 function createGrid(x) {
 
     for (let i = 0; i < x * x; i++) {
@@ -44,9 +47,21 @@ function createGrid(x) {
     gridContainer.style.grid = `repeat(${x}, 1fr) / repeat(${x}, 1fr)`;
 };
 
-document.onload = createGrid(16);
+function removeCells() {
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
+}
 
-const cells = gridContainer.querySelectorAll('div');
-cells.forEach(cell => cell.addEventListener('mouseover', () => {
-    cell.style.backgroundColor = '#000000';
-}));
+function paint() {
+    const cells = gridContainer.querySelectorAll('div');
+
+    cells.forEach(cell => cell.addEventListener('mouseover', () => {
+        cell.style.backgroundColor = '#000000';
+    }));
+};
+
+document.onload = 
+    createGrid(slider.value);
+    sliderValue.textContent = slider.value + " x " + slider.value;
+    paint();
