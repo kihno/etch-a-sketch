@@ -12,7 +12,6 @@ slider.oninput = function() {
     sliderValue.textContent = this.value + " x " + this.value;
     removeCells();
     createGrid(this.value);
-
     paint();
 }
 
@@ -36,6 +35,11 @@ colorButton.addEventListener('click', () => {
     paint();
 });
 
+greyButton.addEventListener('click', () => {
+    mode = grey;
+    paint();
+});
+
 function randomColor() {
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
@@ -56,6 +60,15 @@ function paint() {
         case color:
             cells.forEach(cell => cell.addEventListener('mouseover', () => {
                 cell.style.backgroundColor = randomColor();
+            }));
+            break;
+        case grey:
+            const greyscale = ['#e5e5e5', '#cccccc', '#b2b2b2', '#999999', '#7f7f7f', '#666666', '#4c4c4c', '#333333', '#191919', '#000000'];
+            cells.forEach(cell => cell.addEventListener('mouseover', () => {
+                let shade = 0++;
+                cell.style.backgroundColor = greyscale[shade];
+            
+                
             }));
             break;
     }
