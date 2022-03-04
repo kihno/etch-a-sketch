@@ -21,7 +21,6 @@ let previous = null;
 clear.addEventListener('click', () => {
     removeCells();
     createGrid(slider.value);
-    previous.focus();
     paint();
 });
 
