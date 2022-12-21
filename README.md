@@ -1,6 +1,6 @@
 # Etch-A-Sketch
 
-![](src/images/etchasketch.png)
+![](images/etchasketch.png)
 
 https://kihno.github.io/etch-a-sketch/
 
